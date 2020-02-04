@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+  <style type="text/css">
+BODY {
+
+  background: #0066CC; 
+
+  background-image:url(imagen.jpg);
+  background-attachment: fixed;
+  background-repeat: repeat;
+ 
+
+  color: #FFFFFF; //color a las letras blanco
+ 
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<center>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <?php
+
+	include("Conexion.php");
+	
+    $codigo = $_POST['codigo'];
+    $nombre = $_POST['nombre'];
+
+    
+	$query="select codigo_usuario from usuario where codigo_usuario='$codigo'";
+	$result = mysql_query($query) or die("Error en la instruccion SQL");
+    
+	
+	
+	if (mysql_num_rows($result) > 0) {
+    
+	echo "<h1>El Registro Ya se Encuentra Insertado</h1></br>";
+       echo "<a href=ingreso.php>Atras</a><br/><br/>";
+	echo "<a href=indexconsulta.php>Index</a>";
+    
+	} elseif (mysql_num_rows($result) == 0) {
+    
+	$query="insert into usuario(codigo_usuario,nombre) values('$codigo','$nombre')";
+    
+	$result=mysql_query($query) or die("Error ejecutar la instrucción SQL ".mysql_error());
+    
+	echo "<h1>Registro Guardado</h1><br/>";
+    
+	echo "<a href=ingreso.php>Atras</a><br/><br/>";
+
+	echo "<a href=indexconsulta.php>Index</a>";
+    
+	mysql_close();
+    
+	}
+	
+    ?>
+
+
+
+
+</center>
+</body>
+</html>
