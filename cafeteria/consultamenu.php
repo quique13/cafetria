@@ -30,14 +30,14 @@ include("Conexion.php");
 $hoy=date("Y-m-d");
 
 $query = "SELECT * FROM gastos WHERE fecha='$hoy' ORDER BY ID DESC LIMIT 5";
-$result = mysql_query($query) or die("Error en la instruccion SQL");
+$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
 
 //echo $fecha1;
 //echo $fecha2;
 
 
-if ($row = mysql_fetch_array($result)){
+if ($row = mysqli_fetch_array($result)){
 
 echo "<br><br><strong><div align='center'>Ultimos Pedidos Confirmados</div></strong><br>";
 
@@ -58,7 +58,7 @@ echo "<td width='200px'>".$row["descripcion"]."</td> ";
 
 echo "</tr> ";
 
-} while ($row = mysql_fetch_array($result));
+} while ($row = mysqli_fetch_array($result));
 echo "</table></center>";
 
 

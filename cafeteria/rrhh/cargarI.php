@@ -34,9 +34,9 @@ BODY {
 	include ('Conexion.php');
 	$consult = "SELECT id_producto,descripcion FROM cafeteria.productos
 where estado ='1'";
-$result = mysql_query($consult) or die(mysql_error());
+$result = mysqli_query($consult) or die(mysqli_error());
     ?><select  name="id_producto[]">
-  <? while ($row = mysql_fetch_array($result))
+  <? while ($row = mysqli_fetch_array($result))
   {
 	 ?><option value="<? echo $row['id_producto']?>"><? echo $row['descripcion']?></option> 
   <? } ?>

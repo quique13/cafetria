@@ -30,9 +30,9 @@ BODY {
 	$ingreso = $_POST['ingreso'];
 	
 	$query = "SELECT * FROM usuario WHERE nombre LIKE '%$ingreso%' AND estado='a'";
-	$result = mysql_query($query) or die("Error en la instruccion SQL");
+	$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
-if ($row = mysql_fetch_array($result)){
+if ($row = mysqli_fetch_array($result)){
 
 echo "<br><strong><div align='center'>VERIFICACI&Oacute;N</div></strong><br>";
 
@@ -52,7 +52,7 @@ echo "<td>".$row["nombre"]."</td>";
 echo "<td>".'<a href="cancelacion3.php?id='.$row["id"].'&codigo_usuario='.$row["codigo_usuario"].'">'.Cancelar."</a></td> ";
 echo "</tr> ";
 
-} while ($row = mysql_fetch_array($result));
+} while ($row = mysqli_fetch_array($result));
 
 echo "</table></center>";
 echo "<br><br>";

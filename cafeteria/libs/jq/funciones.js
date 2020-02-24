@@ -121,8 +121,10 @@ function Compra(precio,cat,total,oper,id){
 			$("#menu").html(response.result);
 			$("#categorias").html(response.result1);
 		},
-		error:function() {
-			$("#divAlert").html('<div class="alert alert-danger" id="alert"><strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></strong>Intente nuevamente</div>');
+		error:function(response, error) {
+			console.log(error);
+			//alert(" Can't do because: " + error);
+			$("#divAlert").html('<div class="alert alert-danger" id="alert"><strong><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></strong>Intente nuevamente!!!!</div>');
 			$("#divAlert").show(500);
 			setTimeout('$("#divAlert").hide(500)',2500);
 		}	

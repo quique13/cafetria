@@ -48,8 +48,8 @@ if($tipo=='agregar')
 {
 	$consult = "SELECT * FROM usuario
 where codigo_usuario='$usuario'";
-	$result = mysql_query($consult) or die(mysql_error());
-	if ($row = mysql_fetch_array($result)>'1')
+	$result = mysqli_query($consult) or die(mysqli_error());
+	if ($row = mysqli_fetch_array($result)>'1')
 	{
 		$cadena.= '
 
@@ -60,7 +60,7 @@ where codigo_usuario='$usuario'";
 	{
 		$insert = "insert into usuario (codigo_usuario,nombre,estado)
 	values('$usuario','$nombreA','a') ";	
-		$result = mysql_query($insert) or die(mysql_error());
+		$result = mysqli_query($insert) or die(mysqli_error());
 		$cadena.= '
 
 <div align="center">
@@ -88,7 +88,7 @@ where codigo_usuario='$usuario'";
 
 
 	$queryI="Update usuario set estado='c' Where codigo_usuario = '$id'";	
-	if($resultI = mysql_query($queryI) or die('Error en la instruccion SQL'));
+	if($resultI = mysqli_query($queryI) or die('Error en la instruccion SQL'));
 	{
 		$cadena.='<div align="center"> <h2>El usuario '.$nombre.' ha sido dado de baja satisfactoriamente</h2>
            </div>';
@@ -134,42 +134,42 @@ $fechaJ=strtotime('+17 day',strtotime($_POST['fechaL']));
 	$fechaV=date('Y-m-d',$fechaV);
 }
 
-	$queryL="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('lunes','".mysql_real_escape_string($lunes1)."','".mysql_real_escape_string($lunes2)."','$fechaL')
+	$queryL="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('lunes','".mysqli_real_escape_string($lunes1)."','".mysqli_real_escape_string($lunes2)."','$fechaL')
 		ON DUPLICATE KEY UPDATE
-		menu_1='".mysql_real_escape_string($lunes1)."',menu_2='".mysql_real_escape_string($lunes2)."'";	
-	if($resultL = mysql_query($queryL) or die('Error en la instruccion SQL1'));
+		menu_1='".mysqli_real_escape_string($lunes1)."',menu_2='".mysqli_real_escape_string($lunes2)."'";	
+	if($resultL = mysqli_query($queryL) or die('Error en la instruccion SQL1'));
 	{
 		$cadena.='<div align="center"> <h2>El menú de lunes ha sido cargado exitosamente</h2>
            </div>';
 	}
-	$queryM="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('martes','".mysql_real_escape_string($martes1)."','".mysql_real_escape_string($martes2)."','$fechaM')
+	$queryM="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('martes','".mysqli_real_escape_string($martes1)."','".mysqli_real_escape_string($martes2)."','$fechaM')
 	ON DUPLICATE KEY UPDATE
-		menu_1='".mysql_real_escape_string($martes1)."',menu_2='".mysql_real_escape_string($martes2)."'";	
-	if($resultM = mysql_query($queryM) or die('Error en la instruccion SQL2'));
+		menu_1='".mysqli_real_escape_string($martes1)."',menu_2='".mysqli_real_escape_string($martes2)."'";	
+	if($resultM = mysqli_query($queryM) or die('Error en la instruccion SQL2'));
 	{
 		$cadena.='<div align="center"> <h2>El menú de martes ha sido cargado exitosamente</h2>
            </div>';
 	}
-	$queryMi="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('miercoles','".mysql_real_escape_string($miercoles1)."','".mysql_real_escape_string($miercoles2)."','$fechaMi')
+	$queryMi="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('miercoles','".mysqli_real_escape_string($miercoles1)."','".mysqli_real_escape_string($miercoles2)."','$fechaMi')
 	ON DUPLICATE KEY UPDATE
-		menu_1='".mysql_real_escape_string($miercoles1)."',menu_2='".mysql_real_escape_string($miercoles2)."'";	
-	if($resultMi = mysql_query($queryMi) or die('Error en la instruccion SQL3'));
+		menu_1='".mysqli_real_escape_string($miercoles1)."',menu_2='".mysqli_real_escape_string($miercoles2)."'";	
+	if($resultMi = mysqli_query($queryMi) or die('Error en la instruccion SQL3'));
 	{
 		$cadena.='<div align="center"> <h2>El menú de miércoles ha sido cargado exitosamente</h2>
            </div>';
 	}
-	$queryJ="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('jueves','".mysql_real_escape_string($jueves1)."','".mysql_real_escape_string($jueves2)."','$fechaJ')
+	$queryJ="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('jueves','".mysqli_real_escape_string($jueves1)."','".mysqli_real_escape_string($jueves2)."','$fechaJ')
 	ON DUPLICATE KEY UPDATE
-		menu_1='".mysql_real_escape_string($jueves1)."',menu_2='".mysql_real_escape_string($jueves2)."'";	
-	if($resultJ = mysql_query($queryJ) or die('Error en la instruccion SQL4'));
+		menu_1='".mysqli_real_escape_string($jueves1)."',menu_2='".mysqli_real_escape_string($jueves2)."'";	
+	if($resultJ = mysqli_query($queryJ) or die('Error en la instruccion SQL4'));
 	{
 		$cadena.='<div align="center"> <h2>El menú de jueves ha sido cargado exitosamente</h2>
            </div>';
 	}
-	$queryV="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('viernes','".mysql_real_escape_string($viernes1)."','".mysql_real_escape_string($viernes2)."','$fechaV')
+	$queryV="insert into menu_semanal (dia,menu_1,menu_2,fecha) values('viernes','".mysqli_real_escape_string($viernes1)."','".mysqli_real_escape_string($viernes2)."','$fechaV')
 	ON DUPLICATE KEY UPDATE
-		menu_1='".mysql_real_escape_string($viernes1)."',menu_2='".mysql_real_escape_string($viernes2)."'";	
-	if($resultV = mysql_query($queryV) or die('Error en la instruccion SQL5'));
+		menu_1='".mysqli_real_escape_string($viernes1)."',menu_2='".mysqli_real_escape_string($viernes2)."'";	
+	if($resultV = mysqli_query($queryV) or die('Error en la instruccion SQL5'));
 	{
 		$cadena.='<div align="center"> <h2>El menú de viernes ha sido cargado exitosamente</h2>
            </div>';
@@ -203,9 +203,9 @@ else if($tipo=='GetMenu')
 		$selectL="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='lunes'";
-	$resultL = mysql_query($selectL) or die('Error en la instruccion SQL1');
+	$resultL = mysqli_query($selectL) or die('Error en la instruccion SQL1');
 	
-		while($rowL = mysql_fetch_array($resultL))
+		while($rowL = mysqli_fetch_array($resultL))
 		{
 			$fechaLP=strtotime($rowL['fecha']);
 			$lunes1=$rowL['menu_1'];
@@ -214,8 +214,8 @@ and dia='lunes'";
 			$hoy=strtotime(date('Y-m-d'));
 			$selectLP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaLP';";
-			$resultLP = mysql_query($selectLP) or die('Error en la instruccion PEDIDOS lunes');
-			$rowLP = mysql_num_rows($resultLP);
+			$resultLP = mysqli_query($selectLP) or die('Error en la instruccion PEDIDOS lunes');
+			$rowLP = mysqli_num_rows($resultLP);
 			if($rowLP>=1||$hoy>=$fechaLP )
 			{
 				$disabledL='disabled';
@@ -228,9 +228,9 @@ and dia='lunes'";
 		$selectM="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='martes'";
-	$resultM = mysql_query($selectM) or die('Error en la instruccion SQL1');
+	$resultM = mysqli_query($selectM) or die('Error en la instruccion SQL1');
 	
-		while($rowM = mysql_fetch_array($resultM))
+		while($rowM = mysqli_fetch_array($resultM))
 		{
 			
 			$martes1=$rowM['menu_1'];
@@ -240,8 +240,8 @@ and dia='martes'";
 			$hoy=date('Y-m-d').'<br>';
 			$selectMP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaMP';";
-			$resultMP = mysql_query($selectMP) or die('Error en la instruccion PEDIDOS martes');
-			$rowMP = mysql_num_rows($resultMP);
+			$resultMP = mysqli_query($selectMP) or die('Error en la instruccion PEDIDOS martes');
+			$rowMP = mysqli_num_rows($resultMP);
 			if($rowMP>=1||$hoy>=$fechaMP )
 			{
 				$disabledM='disabled';
@@ -254,9 +254,9 @@ and dia='martes'";
 		$selectMi="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='miercoles'";
-	$resultMi = mysql_query($selectMi) or die('Error en la instruccion SQL1');
+	$resultMi = mysqli_query($selectMi) or die('Error en la instruccion SQL1');
 	
-		while($rowMi = mysql_fetch_array($resultMi))
+		while($rowMi = mysqli_fetch_array($resultMi))
 		{
 			
 			$miercoles1=$rowMi['menu_1'];
@@ -266,8 +266,8 @@ and dia='miercoles'";
 			$hoy=date('Y-m-d');
 			$selectMiP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaMiP';";
-			$resultMiP = mysql_query($selectMiP) or die('Error en la instruccion PEDIDOS miercoles');
-			$rowMiP = mysql_num_rows($resultMiP);
+			$resultMiP = mysqli_query($selectMiP) or die('Error en la instruccion PEDIDOS miercoles');
+			$rowMiP = mysqli_num_rows($resultMiP);
 			if($rowMiP>=1||$hoy>=$fechaMiP )
 			{
 				$disabledMi='disabled';
@@ -280,9 +280,9 @@ and dia='miercoles'";
 		$selectJ="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='jueves'";
-	$resultJ = mysql_query($selectJ) or die('Error en la instruccion SQL1');
+	$resultJ = mysqli_query($selectJ) or die('Error en la instruccion SQL1');
 	
-		while($rowJ = mysql_fetch_array($resultJ))
+		while($rowJ = mysqli_fetch_array($resultJ))
 	{
 		
 		$jueves1=$rowJ['menu_1'];
@@ -292,8 +292,8 @@ and dia='jueves'";
 		$hoy=date('Y-m-d');
 		$selectJP="SELECT * FROM cafeteria.pedidos
 where fecha_menu='$fechaJP';";
-		$resultJP = mysql_query($selectJP) or die('Error en la instruccion PEDIDOS jueves');
-		$rowJP = mysql_num_rows($resultJP);
+		$resultJP = mysqli_query($selectJP) or die('Error en la instruccion PEDIDOS jueves');
+		$rowJP = mysqli_num_rows($resultJP);
 		if($rowJP>=1||$hoy>=$fechaJP )
 		{
 			$disabledJ='disabled';
@@ -305,9 +305,9 @@ where fecha_menu='$fechaJP';";
 	$selectV="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='viernes'";
-	$resultV = mysql_query($selectV) or die('Error en la instruccion SQL1');
+	$resultV = mysqli_query($selectV) or die('Error en la instruccion SQL1');
 	
-		while($rowV = mysql_fetch_array($resultV))
+		while($rowV = mysqli_fetch_array($resultV))
 		{
 			
 			$viernes1=$rowV['menu_1'];
@@ -317,8 +317,8 @@ and dia='viernes'";
 			$hoy=date('Y-m-d');
 			$selectVP="SELECT * FROM cafeteria.pedidos
 where fecha_menu='$fechaVP';";
-			$resultVP = mysql_query($selectVP) or die('Error en la instruccion PEDIDOS viernes');
-			$rowVP = mysql_num_rows($resultVP);
+			$resultVP = mysqli_query($selectVP) or die('Error en la instruccion PEDIDOS viernes');
+			$rowVP = mysqli_num_rows($resultVP);
 			if($rowVP>=1||$hoy>=$fechaVP )
 			{
 				$disabledV='disabled';
@@ -354,9 +354,9 @@ where fecha_menu='$fechaVP';";
 		$selectL="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='lunes'";
-	$resultL = mysql_query($selectL) or die('Error en la instruccion SQL1');
+	$resultL = mysqli_query($selectL) or die('Error en la instruccion SQL1');
 	
-		while($rowL = mysql_fetch_array($resultL))
+		while($rowL = mysqli_fetch_array($resultL))
 	{
 		
 		$idL=$rowL['id_menu_semanal'];
@@ -367,8 +367,8 @@ and dia='lunes'";
 		$hoy=(date('Y-m-d'));
 		$selectLP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaLP';";
-			$resultLP = mysql_query($selectLP) or die('Error en la instruccion PEDIDOS lunes');
-			$rowLP = mysql_num_rows($resultLP);
+			$resultLP = mysqli_query($selectLP) or die('Error en la instruccion PEDIDOS lunes');
+			$rowLP = mysqli_num_rows($resultLP);
 			if($rowLP>=1||$hoy>=$fechaLP )
 			{
 				$disabledL='disabled';
@@ -381,9 +381,9 @@ and dia='lunes'";
 		$selectM="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='martes'";
-	$resultM = mysql_query($selectM) or die('Error en la instruccion SQL1');
+	$resultM = mysqli_query($selectM) or die('Error en la instruccion SQL1');
 	
-		while($rowM = mysql_fetch_array($resultM))
+		while($rowM = mysqli_fetch_array($resultM))
 	{
 		$idM=$rowM['id_menu_semanal'];
 		$martes1=$rowM['menu_1'];
@@ -393,8 +393,8 @@ and dia='martes'";
 			$hoy=date('Y-m-d').'<br>';
 			$selectMP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaMP';";
-			$resultMP = mysql_query($selectMP) or die('Error en la instruccion PEDIDOS martes');
-			$rowMP = mysql_num_rows($resultMP);
+			$resultMP = mysqli_query($selectMP) or die('Error en la instruccion PEDIDOS martes');
+			$rowMP = mysqli_num_rows($resultMP);
 			if($rowMP>=1||$hoy>=$fechaMP )
 			{
 				$disabledM='disabled';
@@ -407,9 +407,9 @@ and dia='martes'";
 		$selectMi="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='miercoles'";
-	$resultMi = mysql_query($selectMi) or die('Error en la instruccion SQL1');
+	$resultMi = mysqli_query($selectMi) or die('Error en la instruccion SQL1');
 	
-		while($rowMi = mysql_fetch_array($resultMi))
+		while($rowMi = mysqli_fetch_array($resultMi))
 	{
 		$idMi=$rowMi['id_menu_semanal'];
 		$miercoles1=$rowMi['menu_1'];
@@ -419,8 +419,8 @@ and dia='miercoles'";
 			$hoy=date('Y-m-d');
 			$selectMiP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaMiP';";
-			$resultMiP = mysql_query($selectMiP) or die('Error en la instruccion PEDIDOS miercoles');
-			$rowMiP = mysql_num_rows($resultMiP);
+			$resultMiP = mysqli_query($selectMiP) or die('Error en la instruccion PEDIDOS miercoles');
+			$rowMiP = mysqli_num_rows($resultMiP);
 			if($rowMiP>=1||$hoy>=$fechaMiP )
 			{
 				$disabledMi='disabled';
@@ -433,9 +433,9 @@ and dia='miercoles'";
 		$selectJ="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='jueves'";
-	$resultJ = mysql_query($selectJ) or die('Error en la instruccion SQL1');
+	$resultJ = mysqli_query($selectJ) or die('Error en la instruccion SQL1');
 	
-		while($rowJ = mysql_fetch_array($resultJ))
+		while($rowJ = mysqli_fetch_array($resultJ))
 	{
 		$idJ=$rowJ['id_menu_semanal'];
 		$jueves1=$rowJ['menu_1'];
@@ -445,8 +445,8 @@ and dia='jueves'";
 		$hoy=date('Y-m-d');
 		$selectJP="SELECT * FROM cafeteria.pedidos
 where fecha_menu='$fechaJP';";
-		$resultJP = mysql_query($selectJP) or die('Error en la instruccion PEDIDOS jueves');
-		$rowJP = mysql_num_rows($resultJP);
+		$resultJP = mysqli_query($selectJP) or die('Error en la instruccion PEDIDOS jueves');
+		$rowJP = mysqli_num_rows($resultJP);
 		if($rowJP>=1||$hoy>=$fechaJP )
 		{
 			$disabledJ='disabled';
@@ -458,9 +458,9 @@ where fecha_menu='$fechaJP';";
 	$selectV="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='viernes'";
-	$resultV = mysql_query($selectV) or die('Error en la instruccion SQL1');
+	$resultV = mysqli_query($selectV) or die('Error en la instruccion SQL1');
 	
-		while($rowV = mysql_fetch_array($resultV))
+		while($rowV = mysqli_fetch_array($resultV))
 	{
 		$idV=$rowV['id_menu_semanal'];
 		$viernes1=$rowV['menu_1'];
@@ -470,8 +470,8 @@ and dia='viernes'";
 		$hoy=date('Y-m-d');
 		$selectVP="SELECT * FROM cafeteria.pedidos
 where fecha_menu='$fechaVP';";
-		$resultVP = mysql_query($selectVP) or die('Error en la instruccion PEDIDOS viernes');
-		$rowVP = mysql_num_rows($resultVP);
+		$resultVP = mysqli_query($selectVP) or die('Error en la instruccion PEDIDOS viernes');
+		$rowVP = mysqli_num_rows($resultVP);
 		if($rowVP>=1||$hoy>=$fechaVP )
 		{
 			$disabledV='disabled';
@@ -504,9 +504,9 @@ where fecha_menu='$fechaVP';";
 		$selectL="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='lunes'";
-	$resultL = mysql_query($selectL) or die('Error en la instruccion SQL1');
+	$resultL = mysqli_query($selectL) or die('Error en la instruccion SQL1');
 	
-		while($rowL = mysql_fetch_array($resultL))
+		while($rowL = mysqli_fetch_array($resultL))
 		{
 			$fechaP=$rowL['id_menu_semanal'];
 			$lunes1=$rowL['menu_1'];
@@ -516,8 +516,8 @@ and dia='lunes'";
 		$hoy=(date('Y-m-d'));
 		$selectLP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaLP';";
-			$resultLP = mysql_query($selectLP) or die('Error en la instruccion PEDIDOS lunes');
-			$rowLP = mysql_num_rows($resultLP);
+			$resultLP = mysqli_query($selectLP) or die('Error en la instruccion PEDIDOS lunes');
+			$rowLP = mysqli_num_rows($resultLP);
 			if($rowLP>=1||$hoy>=$fechaLP )
 			{
 				$disabledL='disabled';
@@ -531,9 +531,9 @@ and dia='lunes'";
 		$selectM="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='martes'";
-	$resultM = mysql_query($selectM) or die('Error en la instruccion SQL1');
+	$resultM = mysqli_query($selectM) or die('Error en la instruccion SQL1');
 	
-		while($rowM = mysql_fetch_array($resultM))
+		while($rowM = mysqli_fetch_array($resultM))
 		{
 			$idM=$rowM['id_menu_semanal'];
 			$martes1=$rowM['menu_1'];
@@ -543,8 +543,8 @@ and dia='martes'";
 			$hoy=date('Y-m-d').'<br>';
 			$selectMP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaMP';";
-			$resultMP = mysql_query($selectMP) or die('Error en la instruccion PEDIDOS martes');
-			$rowMP = mysql_num_rows($resultMP);
+			$resultMP = mysqli_query($selectMP) or die('Error en la instruccion PEDIDOS martes');
+			$rowMP = mysqli_num_rows($resultMP);
 			if($rowMP>=1||$hoy>=$fechaMP )
 			{
 				$disabledM='disabled';
@@ -557,9 +557,9 @@ and dia='martes'";
 		$selectMi="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='miercoles'";
-	$resultMi = mysql_query($selectMi) or die('Error en la instruccion SQL1');
+	$resultMi = mysqli_query($selectMi) or die('Error en la instruccion SQL1');
 	
-		while($rowMi = mysql_fetch_array($resultMi))
+		while($rowMi = mysqli_fetch_array($resultMi))
 		{
 			$idMi=$rowMi['id_menu_semanal'];
 			$miercoles1=$rowMi['menu_1'];
@@ -569,8 +569,8 @@ and dia='miercoles'";
 			$hoy=date('Y-m-d');
 			$selectMiP="SELECT * FROM cafeteria.pedidos
 	where fecha_menu='$fechaMiP';";
-			$resultMiP = mysql_query($selectMiP) or die('Error en la instruccion PEDIDOS miercoles');
-			$rowMiP = mysql_num_rows($resultMiP);
+			$resultMiP = mysqli_query($selectMiP) or die('Error en la instruccion PEDIDOS miercoles');
+			$rowMiP = mysqli_num_rows($resultMiP);
 			if($rowMiP>=1||$hoy>=$fechaMiP )
 			{
 				$disabledMi='disabled';
@@ -583,9 +583,9 @@ and dia='miercoles'";
 		$selectJ="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='jueves'";
-	$resultJ = mysql_query($selectJ) or die('Error en la instruccion SQL1');
+	$resultJ = mysqli_query($selectJ) or die('Error en la instruccion SQL1');
 	
-		while($rowJ = mysql_fetch_array($resultJ))
+		while($rowJ = mysqli_fetch_array($resultJ))
 		{
 			$idJ=$rowJ['id_menu_semanal'];
 			$jueves1=$rowJ['menu_1'];
@@ -595,8 +595,8 @@ and dia='jueves'";
 			$hoy=date('Y-m-d');
 			$selectJP="SELECT * FROM cafeteria.pedidos
 where fecha_menu='$fechaJP';";
-			$resultJP = mysql_query($selectJP) or die('Error en la instruccion PEDIDOS jueves');
-			$rowJP = mysql_num_rows($resultJP);
+			$resultJP = mysqli_query($selectJP) or die('Error en la instruccion PEDIDOS jueves');
+			$rowJP = mysqli_num_rows($resultJP);
 			if($rowJP>=1||$hoy>=$fechaJP )
 			{
 				$disabledJ='disabled';
@@ -608,9 +608,9 @@ where fecha_menu='$fechaJP';";
 	$selectV="select * from menu_semanal
 where fecha between '$inicioSemana' and '$finSemana'
 and dia='viernes'";
-	$resultV = mysql_query($selectV) or die('Error en la instruccion SQL1');
+	$resultV = mysqli_query($selectV) or die('Error en la instruccion SQL1');
 	
-		while($rowV = mysql_fetch_array($resultV))
+		while($rowV = mysqli_fetch_array($resultV))
 		{
 			$idV=$rowV['id_menu_semanal'];
 			$viernes1=$rowV['menu_1'];
@@ -620,8 +620,8 @@ and dia='viernes'";
 			$hoy=date('Y-m-d');
 			$selectVP="SELECT * FROM cafeteria.pedidos
 where fecha_menu='$fechaVP';";
-			$resultVP = mysql_query($selectVP) or die('Error en la instruccion PEDIDOS viernes');
-			$rowVP = mysql_num_rows($resultVP);
+			$resultVP = mysqli_query($selectVP) or die('Error en la instruccion PEDIDOS viernes');
+			$rowVP = mysqli_num_rows($resultVP);
 			if($rowVP>=1||$hoy>=$fechaVP )
 			{
 				$disabledV='disabled';

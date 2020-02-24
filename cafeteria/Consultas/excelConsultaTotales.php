@@ -16,9 +16,9 @@ $codigo_usuario = $_GET['codigo_usuario'];
 $nombre = $_GET['nombre']; 
 
 	$query3 = "SELECT SUM(monto_total) as monto_total FROM gastos WHERE fecha>='$fecha1' AND fecha<='$fecha2'";
-		$result3 = mysql_query($query3) or die("Error en la instruccion SQL");
+		$result3 = mysqli_query($query3) or die("Error en la instruccion SQL");
 
-if ($row3 = mysql_fetch_array($result3)){
+if ($row3 = mysqli_fetch_array($result3)){
 
 do {
 
@@ -28,7 +28,7 @@ do {
 	
 	
 
-} while ($row3 = mysql_fetch_array($result3));
+} while ($row3 = mysqli_fetch_array($result3));
 
 
 } 
@@ -36,9 +36,9 @@ do {
 
 
 $query2 = "SELECT * FROM usuario";
-$result2 = mysql_query($query2) or die("Error en la instruccion SQL");
+$result2 = mysqli_query($query2) or die("Error en la instruccion SQL");
 
-if ($row2 = mysql_fetch_array($result2)){
+if ($row2 = mysqli_fetch_array($result2)){
 
 do {
  
@@ -49,11 +49,11 @@ do {
 
 
 	 	$query = "SELECT SUM(monto_total) as monto_total FROM gastos WHERE fecha>='$fecha1' AND fecha<='$fecha2' AND 		   	codigo_usuario='$codigo_usuario'";
-		$result = mysql_query($query) or die("Error en la instruccion SQL");
+		$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
 		
 
-		if ($row = mysql_fetch_array($result)){
+		if ($row = mysqli_fetch_array($result)){
 		
 		
 
@@ -63,7 +63,7 @@ do {
 
              
 
-				} while ($row = mysql_fetch_array($result));
+				} while ($row = mysqli_fetch_array($result));
 
 
 
@@ -72,6 +72,6 @@ do {
 }
 
 
-} while ($row2 = mysql_fetch_array($result2));
+} while ($row2 = mysqli_fetch_array($result2));
 }
  ?>

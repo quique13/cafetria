@@ -42,9 +42,9 @@ if($tipo=='PrevNueva')
 
  $SelectOr=("select * from categoria
  where estado='1'"); 
- $query=mysql_query($SelectOr) or die(mysql_error());
+ $query=mysqli_query($SelectOr) or die(mysqli_error());
 	$cadena.='<option value ="0"> Seleccione una opción</option>';
-	while($row=mysql_fetch_array($query))
+	while($row=mysqli_fetch_array($query))
  {
  $cadena.= '<option  value="'.$row['id_categoria'].'">'.$row['descripcion'].'</option>'; 
  }
@@ -95,7 +95,7 @@ else if($tipo=='Nueva')
 						$nombre = $_FILES['imagen_cat']['name'];
 						$insert = "insert into categoria (descripcion,imagen_cat,estado)
 		values('$nombre_cat','$nombre','1') ";	
-						$result = mysql_query($insert) or die(mysql_error());
+						$result = mysqli_query($insert) or die(mysqli_error());
 						$cadena.= "Proceso satisfactorio";
 					} else 
 					{
@@ -149,20 +149,20 @@ else if($tipo=='Nueva')
 						$nombre = $_FILES['imagen_cat']['name'];
 						$insert = "insert into productos (descripcion,precio,imagen_producto,estado)
 		values('$nombre_pro','$precio_pro','$nombre','1') ";	
-						if($result = mysql_query($insert) or die(mysql_error()))
+						if($result = mysqli_query($insert) or die(mysqli_error()))
 						{
 							$select = "SELECT * FROM productos
 							where estado='1'
 							order by id_producto desc
 							limit 1; ";	
 							
-							$resultse = mysql_query($select) or die(mysql_error());
-							$row=mysql_fetch_array($resultse);
+							$resultse = mysqli_query($select) or die(mysqli_error());
+							$row=mysqli_fetch_array($resultse);
 							$id_prod=$row['id_producto'];
 							
 							$insert1 = "insert into categoria_producto (id_categoria,id_producto)
 		values('$id_cat','$id_prod') ";
-							$result = mysql_query($insert1) or die(mysql_error());
+							$result = mysqli_query($insert1) or die(mysqli_error());
 						};
 						$cadena.= "Categoría modificado de mane satisfactoria";
 					} else 
@@ -187,8 +187,8 @@ else if($tipo=='PrevEliminar')
 	$select="select * from categoria
 	where id_categoria='$id_cat'
 	and estado='1'";
-	$result = mysql_query($select) or die(mysql_error());
-	$row=mysql_fetch_array($result);
+	$result = mysqli_query($select) or die(mysqli_error());
+	$row=mysqli_fetch_array($result);
 	
 	$cadena.='<div title="Eliminar">
  	<form class="form-inline">
@@ -206,8 +206,8 @@ else if($tipo=='PrevEliminarPro')
 	$select="select * from productos
 	where id_producto='$id_prod'
 	and estado='1'";
-	$result = mysql_query($select) or die(mysql_error());
-	$row=mysql_fetch_array($result);
+	$result = mysqli_query($select) or die(mysqli_error());
+	$row=mysqli_fetch_array($result);
 	
 	$cadena.='<div title="Eliminar">
  	<form class="form-inline">
@@ -224,8 +224,8 @@ else if($tipo=='PrevEditar')
 	$select="select * from categoria
 	where id_categoria='$id_cat'
 	and estado='1'";
-	$result = mysql_query($select) or die(mysql_error());
-	$row=mysql_fetch_array($result);
+	$result = mysqli_query($select) or die(mysqli_error());
+	$row=mysqli_fetch_array($result);
 	
 $tipo='Editar';
 	$cadena.='<div title="Editar">
@@ -250,8 +250,8 @@ on cp.id_producto=prod.id_producto
 where prod.estado='1'
 and prod.id_producto='$id_prod'
 order by cat.id_categoria,prod.descripcion;";
-	$result = mysql_query($select) or die(mysql_error());
-	$row=mysql_fetch_array($result);
+	$result = mysqli_query($select) or die(mysqli_error());
+	$row=mysqli_fetch_array($result);
 	
 $tipo='Editar';
 	$cadena.='<div title="Editar">
@@ -271,7 +271,7 @@ else if($tipo=='Editar')
 	{
 		$update = "update categoria set descripcion='$nombre_cat'
 		where id_categoria='$id_cat' ";	
-		$result = mysql_query($update) or die(mysql_error());
+		$result = mysqli_query($update) or die(mysqli_error());
 		$cadena.="Categoria editada de manera satisfactoria";
 	}
 	else
@@ -305,7 +305,7 @@ else if($tipo=='Editar')
 						$nombre = $_FILES['imagen_cat']['name'];
 						$update = "update categoria set descripcion='$nombre_cat',imagen_cat='$nombre' 
 						where id_categoria='$id_cat'";	
-						$result = mysql_query($update) or die(mysql_error());
+						$result = mysqli_query($update) or die(mysqli_error());
 						$cadena.= "Categoría modificado de manera satisfactoria";
 					} else 
 					{
@@ -328,7 +328,7 @@ else if($tipo=='Eliminar')
 	$id_cat=$_POST['id'];
 	$update="update categoria SET estado='0'
 	where id_categoria='$id_cat'";
-	if($result = mysql_query($update) or die(mysql_error()));
+	if($result = mysqli_query($update) or die(mysqli_error()));
 	
 	{
 		$cadena.='<div title="Eliminar">
@@ -347,7 +347,7 @@ else if($tipo=='EliminarPro')
 	$id_prod=$_POST['id'];
 	$update="update productos SET estado='0'
 	where id_producto='$id_prod'";
-	if($result = mysql_query($update) or die(mysql_error()));
+	if($result = mysqli_query($update) or die(mysqli_error()));
 	
 	{
 		$cadena.='<div title="Eliminar">

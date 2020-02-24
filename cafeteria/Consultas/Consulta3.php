@@ -38,13 +38,13 @@ $fecha1 = $_POST['fecha1'];
 $fecha2 = $_POST['fecha2']; 
 
 $query = "SELECT * FROM gastos WHERE fecha>='$fecha1' AND fecha<='$fecha2'";
-$result = mysql_query($query) or die("Error en la instruccion SQL");
+$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
 //echo $fecha1;
 //echo $fecha2;
 
 
-if ($row = mysql_fetch_array($result)){
+if ($row = mysqli_fetch_array($result)){
 
 echo "<br><br><br><br><br><strong><div align='center'>CONSULTA POR FECHAS</div></strong><br>";
 
@@ -72,7 +72,7 @@ echo "<td>".$row["hora"]."</td> ";
 
 echo "</tr> ";
 
-} while ($row = mysql_fetch_array($result));
+} while ($row = mysqli_fetch_array($result));
 
 echo "</table></center>";
 echo "<br><br>";

@@ -37,10 +37,10 @@ include("Conexion.php");
 $usuario = $_POST['usuario'];  
 
 $query = "SELECT * FROM gastos WHERE codigo_usuario='$usuario' ";
-$result = mysql_query($query) or die("Error en la instruccion SQL");
+$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
 
-if ($row = mysql_fetch_array($result)){
+if ($row = mysqli_fetch_array($result)){
 
 echo "<br><br><br><br><br><strong><div align='center'>CONSULTA POR COLABORADOR</div></strong><br>";
 
@@ -68,7 +68,7 @@ echo "<td>".$row["hora"]."</td> ";
 
 echo "</tr> ";
 
-} while ($row = mysql_fetch_array($result));
+} while ($row = mysqli_fetch_array($result));
 echo "</table></center>";
 echo "<br><br>";
 echo '<center><a href="indexconsulta.php">IndexConsulta</a></center>';

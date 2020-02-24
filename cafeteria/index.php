@@ -12,7 +12,7 @@ if(!$_SESSION['userid'])
 	include('Conexion.php');
 	include("session.php");
 	//$precio="precio_";
-	$consulta_cat=mysql_query("select * from categoria where estado = 1 order by id_categoria");
+	$consulta_cat=mysqli_query($conexion,"select * from categoria where estado = 1 order by id_categoria");
 	$LIBS_DIR="./libs/";
 	?>
 	<html>

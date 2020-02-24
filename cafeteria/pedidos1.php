@@ -18,7 +18,7 @@ $limite=date('Y-m-d 10:00:00');
 $limiteNo=strtotime($limite);
 $fecha_inicio=date('Y-m-d',strtotime('+1 day'));
 $queryUser = "SELECT * FROM usuario_reporte WHERE usuario='$user'";
-$Usuario_reporte = mysql_query($queryUser);
+$Usuario_reporte = mysqli_query($queryUser);
 
 
 $cadena.='
@@ -111,7 +111,7 @@ if($hoyNo>=$horaRest1 && $hoyNo<=$horaRest2)
 	<div id="reportes" class="col-md-12 col-lg-12" >
 			<center><table width="800" border="1" bordercolor="#000000" style="table-layout:fixed; font-size:12px" >
 				<caption><center><font color="white">MENÚS DE LA SEMANA <button type="button" class="btn btn-danger btn-sm pull-right" title="Cerrar sesion" onclick="location.href = \'logout1.php\'" >Cerrar sesión</button>
-				';if($row = mysql_num_rows($Usuario_reporte)>=1){
+				';if($row = mysqli_num_rows($Usuario_reporte)>=1){
 				  	$cadena.=' <button type="button" class="btn btn-primary btn-sm pull-right" title="Regresar" onclick="location.href = \'indexconsulta.php\'" >Regresar</button>';
 					}$cadena.='</font></center></caption>
 				<tr bgcolor="#666666"> 
@@ -126,9 +126,9 @@ if($hoyNo>=$horaRest1 && $hoyNo<=$horaRest2)
 	and(menu_1!='' or menu_2!='')
 	order by fecha
 	limit 5;";
-	$result = mysql_query($select) or die('Error en la instruccion SQL1');
+	$result = mysqli_query($select) or die('Error en la instruccion SQL1');
 	
-	while($row = mysql_fetch_array($result))
+	while($row = mysqli_fetch_array($result))
 	{
 		$fechaOrden=date('d-m-Y',strtotime($row['fecha']));
 		$id_count=$id_count+1;

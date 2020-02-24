@@ -30,18 +30,18 @@ if(!$_SESSION['userid'])
 	
 		$queryU = "SELECT * FROM usuario
 where codigo_usuario='$usuario'";
-		$resultU = mysql_query($queryU) or die('Error en la instruccion SQL');
+		$resultU = mysqli_query($queryU) or die('Error en la instruccion SQL');
 
 
-		if ($rowU = mysql_fetch_array($resultU))
+		if ($rowU = mysqli_fetch_array($resultU))
 		{
 			$query = "SELECT * FROM gastos_nuevos
 			where codigo_usuario='$usuario'
 			and tipo_compra='credito'
 			and fecha between '$fecha_ini 00:00:00' and '$fecha_fin 23:59:59'";
-			$result = mysql_query($query) or die('Error en la instruccion SQL');
+			$result = mysqli_query($query) or die('Error en la instruccion SQL');
 
-			if ($row = mysql_fetch_array($result))
+			if ($row = mysqli_fetch_array($result))
 			{
 				$h_data=time();
 				$arch=$id_usuario.date('YmdHis').".xls";
@@ -101,7 +101,7 @@ where codigo_usuario='$usuario'";
 				$datos.= '</tr> ';
 
 			} 
-			while ($row = mysql_fetch_array($result));
+			while ($row = mysqli_fetch_array($result));
 			
 			$datos.= '<tr bgcolor="#333333"> ';
 			$datos.= '<td   align="right" ><font color="white"><b>Total:</b></font></td> ';
@@ -115,9 +115,9 @@ where codigo_usuario='$usuario'";
 			fecha between '$fecha_ini' and '$fecha_fin'
 			and
 			codigo_usuario='$usuario' GROUP BY codigo_usuario, nombre";
-			$resultG = mysql_query($queryG) ;
+			$resultG = mysqli_query($queryG) ;
 				
-			$rowG = mysql_fetch_array($resultG);
+			$rowG = mysqli_fetch_array($resultG);
 				
 			if($rowG['monto_total']>'0')
 			{
@@ -159,8 +159,8 @@ where codigo_usuario='$usuario'";
 	where codigo_usuario='$usuario'
 	and tipo_compra='credito'
 	and fecha between '$fecha_ini 00:00:00' and '$fecha_fin 23:59:59'";
-	$result1 = mysql_query($query1) or die('Error en la instruccion SQL');
-	if ($row1 = mysql_fetch_array($result1))
+	$result1 = mysqli_query($query1) or die('Error en la instruccion SQL');
+	if ($row1 = mysqli_fetch_array($result1))
 	{
 		$datos1.= '<strong><div align="center"><h3>Usuario:'.$usuario.'<br> Nombre: '.$row1['nombre'].'</h3></div></strong>';
 		
@@ -201,7 +201,7 @@ where codigo_usuario='$usuario'";
 				$datos1.= '</tr> ';
 
 		}
-		while ($row1 = mysql_fetch_array($result1));
+		while ($row1 = mysqli_fetch_array($result1));
 		$datos1.= '<tr bgcolor="#333333"> ';
 		$datos1.= '<td   align="center" ><font color="white"><b>Total</b></font></td> ';
 		$datos1.= '<td  align="center"><b></b></td> ';
@@ -215,9 +215,9 @@ where codigo_usuario='$usuario'";
 		fecha between '$fecha_ini' and '$fecha_fin'
 		and
 		codigo_usuario='$usuario' GROUP BY codigo_usuario, nombre";
-		$resultGe = mysql_query($queryGe) or die('Error en la instruccion SQLGastos333');
+		$resultGe = mysqli_query($queryGe) or die('Error en la instruccion SQLGastos333');
 			
-		$rowGe = mysql_fetch_array($resultGe);
+		$rowGe = mysqli_fetch_array($resultGe);
 		if($rowGe['monto_total']>'0')
 		{
 			$totale=+$totale+$rowGe['monto_total'];
@@ -253,7 +253,7 @@ where codigo_usuario='$usuario'";
 		fecha between '$fecha_ini 00:00:00' and '$fecha_fin 23:59:59'
 		and tipo_compra='credito' and codigo_usuario!=000
 		group by codigo_usuario, nombre";
-		$resultU = mysql_query($queryU) or die('Error en la instruccion SQL1');
+		$resultU = mysqli_query($queryU) or die('Error en la instruccion SQL1');
 
 		$h_data=time();
 		$arch=$id_usuario.date('YmdHis').".xls";
@@ -274,7 +274,7 @@ where codigo_usuario='$usuario'";
       </form>
 	  <br>';
 
-		if ($row = mysql_fetch_array($resultU))
+		if ($row = mysqli_fetch_array($resultU))
 		{
 			$datos.='<center><table width="800" border="1" bordercolor="#000000" style="table-layout:fixed; font-size:16px" >';
 			$datos.= '<tr bgcolor="#333333"> ';
@@ -289,8 +289,8 @@ where codigo_usuario='$usuario'";
 fecha between '$fecha_ini' and '$fecha_fin'
 and
 codigo_usuario='$cod' GROUP BY codigo_usuario, nombre";
-				$resultG = mysql_query($queryG) or die('Error en la instruccion SQLGastos');
-				$rowG = mysql_fetch_array($resultG);
+				$resultG = mysqli_query($queryG) or die('Error en la instruccion SQLGastos');
+				$rowG = mysqli_fetch_array($resultG);
 		
 				$totalInd=$rowG['monto_total']+number_format($row['monto_total'],2);
 				$count=$count+1;
@@ -308,7 +308,7 @@ codigo_usuario='$cod' GROUP BY codigo_usuario, nombre";
 				$datos.= '<td align="center"><font color="black">'.$row['nombre'].'</font></td> ';
 				$datos.= '<td align="center"><font color="black">Q.'.number_format($totalInd,2).' </font></td> ';
 				$datos.= '</tr> ';
-			}while($row = mysql_fetch_array($resultU));
+			}while($row = mysqli_fetch_array($resultU));
 			$datos.= '<tr bgcolor="#333333"> ';
 			$datos.= '<td align="right" colspan="2"><font color="white"><b>TOTAL: </b></font></td> ';
 			$datos.= '<td align="center" ><font color="white"><b>Q.'.number_format($total,2).'</b></font></td> ';
@@ -322,10 +322,10 @@ codigo_usuario='$cod' GROUP BY codigo_usuario, nombre";
 fecha between '$fecha_ini 00:00:00' and '$fecha_fin 23:59:59'
 and tipo_compra='credito' and codigo_usuario!=000
 group by codigo_usuario, nombre";
-	$result1 = mysql_query($query1) or die('Error en la instruccion SQL');
+	$result1 = mysqli_query($query1) or die('Error en la instruccion SQL');
 
 
-	if ($row1 = mysql_fetch_array($result1))
+	if ($row1 = mysqli_fetch_array($result1))
 	{
 		$datos1.='<center><table width="800" style="table-layout:fixed; font-size:16px" class=" table- table-bordered" >';
 		$datos1.= '<tr bgcolor="#333333"> ';
@@ -341,8 +341,8 @@ fecha between '$fecha_ini' and '$fecha_fin'
 and
 codigo_usuario='$cod' GROUP BY codigo_usuario, nombre";
 
-			$resultG1 = mysql_query($queryG1) or die('Error en la instruccion SQLGastos');
-			$rowG1 = mysql_fetch_array($resultG1);
+			$resultG1 = mysqli_query($queryG1) or die('Error en la instruccion SQLGastos');
+			$rowG1 = mysqli_fetch_array($resultG1);
 			$totalInd1=$rowG1['monto_total']+number_format($row1['monto_total'],2);
 			$count1=$count1+1;
 			$totalE=$totalE+$totalInd1;
@@ -361,7 +361,7 @@ codigo_usuario='$cod' GROUP BY codigo_usuario, nombre";
 			$datos1.= '<td align="center">'.number_format($row1['monto_total'],2).'</td> ';
 			$datos1.= '</tr> ';
 		}
-		while($row1 = mysql_fetch_array($result1));
+		while($row1 = mysqli_fetch_array($result1));
 		$datos1.= '<tr bgcolor="#333333"> ';
 		$datos1.= '<td align="right" colspan="2"><font color="white"><b>TOTAL: </b></font></td> ';
 		$datos1.= '<td align="center" ><font color="white"><b>'.number_format($totalE,2).'</b></font></td> ';
@@ -397,7 +397,7 @@ from gastos_nuevos as gn
     where 
 	fecha between '$fecha_ini 00:00:00' and '$fecha_fin 23:59:59'
 group by gn.descripcion,gnC.cantidad,gnC.total,gnE.cantidad,gnE.total;";
-	$resultU = mysql_query($queryU) or die('Error en la instruccion SQL1');
+	$resultU = mysqli_query($queryU) or die('Error en la instruccion SQL1');
 
 	$h_data=time();
 	$arch=$id_usuario.date('YmdHis').".xls";
@@ -418,7 +418,7 @@ group by gn.descripcion,gnC.cantidad,gnC.total,gnE.cantidad,gnE.total;";
       </form>
 	  <br>';
 
-	if ($row = mysql_fetch_array($resultU))
+	if ($row = mysqli_fetch_array($resultU))
 	{
 		$datos.='<center><table width="900" border="1" bordercolor="#000000" style="table-layout:fixed; font-size:14px" >';
 		$datos.= '<tr bgcolor="#333333"> ';
@@ -456,7 +456,7 @@ group by gn.descripcion,gnC.cantidad,gnC.total,gnE.cantidad,gnE.total;";
 			$datos.= '<td align="center"><font color="black">Q.'.number_format($row['total_efectivo'],2).'</font></td> ';
 			$datos.= '<td align="center"><font color="black">Q.'.number_format($row['total'],2).'</font></td> ';
 			$datos.= '</tr> ';
-		}while($row = mysql_fetch_array($resultU));
+		}while($row = mysqli_fetch_array($resultU));
 		$datos.= '<tr bgcolor="#333333"> ';
 		$datos.= '<td align="right" colspan="2"><font color="white"><b>TOTAL: </b></font></td> ';
 		$datos.= '<td align="center" ><font color="white"><b>'.$cant_credito.'</b></font></td> ';
@@ -494,13 +494,13 @@ from gastos_nuevos as gn
     where 
 	fecha between '$fecha_ini 00:00:00' and '$fecha_fin 23:59:59'
 group by gn.descripcion,gnC.cantidad,gnC.total,gnE.cantidad,gnE.total;";
-	$resultU1 = mysql_query($queryU1) or die('Error en la instruccion SQL1');
+	$resultU1 = mysqli_query($queryU1) or die('Error en la instruccion SQL1');
 
 
 	$datos1.= '<br><strong><div align="center"><font color="black"><h3>CONTROL DE PRODUCTOS VENDIDOS</h3></font></div>
 		</strong>';
 
-	if ($row1 = mysql_fetch_array($resultU1))
+	if ($row1 = mysqli_fetch_array($resultU1))
 	{
 		$datos1.='<center><table width="900" border="1" bordercolor="#000000" style="table-layout:fixed; font-size:14px" >';
 		$datos1.= '<tr bgcolor="#333333"> ';
@@ -538,7 +538,7 @@ group by gn.descripcion,gnC.cantidad,gnC.total,gnE.cantidad,gnE.total;";
 			$datos1.= '<td align="center"><font color="black">Q.'.number_format($row1['total_efectivo'],2).'</font></td> ';
 			$datos1.= '<td align="center"><font color="black">Q.'.number_format($row1['total'],2).'</font></td> ';
 			$datos1.= '</tr> ';
-		}while($row1 = mysql_fetch_array($resultU1));
+		}while($row1 = mysqli_fetch_array($resultU1));
 		$datos1.= '<tr bgcolor="#333333"> ';
 		$datos1.= '<td align="right" colspan="2"><font color="white"><b>TOTAL: </b></font></td> ';
 		$datos1.= '<td align="center" ><font color="white"><b>'.$cant_credito1.'</b></font></td> ';
@@ -598,7 +598,7 @@ and (ms.menu_1!='' or ms.menu_2!='')
 group by ms.dia,ms.fecha ,ms.menu_1,vendido1,ms.menu_2,total_menu2,vendido2
 order by fecha;";
 
-	$resultMS = mysql_query($queryMS) or die('Error en la instruccion SQL Menu semanal');
+	$resultMS = mysqli_query($queryMS) or die('Error en la instruccion SQL Menu semanal');
 	
 	
 
@@ -633,7 +633,7 @@ order by fecha;";
 		$datos.= '<td width=70 style="white-space: normal;"  align="center"><font color="White"><b>Vend.</b></font></td> ';
 		$datos.= '<td width=80 style="white-space: normal;"  align="center"><font color="White"><b>Total solic.</b></font></td> ';
 		$datos.= '<td width=80 style="white-space: normal;"  align="center"><font color="White"><b>Total vend.</b></font></td></tr> ';
-	while($row = mysql_fetch_array($resultMS))
+	while($row = mysqli_fetch_array($resultMS))
 	{
 		
 		
@@ -726,7 +726,7 @@ on ms.fecha=V2.fecha_sin_hora
 where ms.fecha between '$fecha_ini' and '$fecha_fin'
 group by ms.dia, ms.fecha,ms.menu_1,vendido1,ms.menu_2,total_menu2,vendido2
 order by fecha;";
-	$resultMS1 = mysql_query($queryMS1) or die('Error en la instruccion SQL Menu semanal');
+	$resultMS1 = mysqli_query($queryMS1) or die('Error en la instruccion SQL Menu semanal');
 	
 	
 
@@ -748,7 +748,7 @@ order by fecha;";
 		$datos1.= '<td width=70 style="white-space: normal;"  align="center"><font color="White"><b>Vend.</b></font></td> ';
 		$datos1.= '<td width=80 style="white-space: normal;"  align="center"><font color="White"><b>Total solic.</b></font></td> ';
 		$datos1.= '<td width=80 style="white-space: normal;"  align="center"><font color="White"><b>Total vend.</b></font></td></tr> ';
-	while($row1 = mysql_fetch_array($resultMS1))
+	while($row1 = mysqli_fetch_array($resultMS1))
 	{
 		
 		

@@ -12,9 +12,9 @@ include("Conexion.php");
 $usuario = $_GET['usuario'];  
 
 $query = "SELECT * FROM gastos WHERE codigo_usuario='$usuario' ";
-$result = mysql_query($query) or die("Error en la instruccion SQL");
+$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
-if ($row = mysql_fetch_array($result)){
+if ($row = mysqli_fetch_array($result)){
 
 
 
@@ -23,7 +23,7 @@ echo "id,Codigo_Usuario,Nombre,Monto_Total,Descripcion,Fecha,Hora\n";
 do {
 echo $row["id"].",".$row["codigo_usuario"].",".$row["nombre"].",".$row["monto_total"].',"'.$row["descripcion"].'",'.$row["fecha"].",".$row["hora"]."\n";
 
-} while ($row = mysql_fetch_array($result));
+} while ($row = mysqli_fetch_array($result));
 
 } else {
 echo"Sin datos";

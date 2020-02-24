@@ -134,9 +134,9 @@ where fecha >= '$fecha_inicio'
 and(menu_1!='' or menu_2!='')
 order by fecha
 limit 5;";
-	$result = mysql_query($select) or die('Error en la instruccion SQL1');
+	$result = mysqli_query($select) or die('Error en la instruccion SQL1');
 	
-	while($row = mysql_fetch_array($result))
+	while($row = mysqli_fetch_array($result))
 	{
 		$fechaOrden=date('d-m-Y',strtotime($row['fecha']));
 		$id_count=$id_count+1;

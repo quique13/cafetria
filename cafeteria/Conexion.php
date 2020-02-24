@@ -1,13 +1,12 @@
 <?php
-//$mysql_host = "172.29.10.100";
-$mysql_host = "172.29.11.26";
-$mysql_database = "cafeteria";
-$mysql_user = "esaavedra";
-//$mysql_password = "EsAAv20166";
-$mysql_password = "EsAAv2016";
+//$mysqli_host = "172.29.10.100";
+$mysqli_host = "localhost";
+$mysqli_database = "cafeteria";
+$mysqli_user = "root";
+//$mysqli_password = "EsAAv20166";
+$mysqli_password = "";
 //Conexión
-    $conexion = mysql_connect($mysql_host, $mysql_user, $mysql_password) or die("Problemas al tratar de establecer la conexion");
-//Seleccionar Base de Datos
-	$bd_sel = mysql_select_db($mysql_database) or die("Problemas al  seleccionar la base de datos");
-	mysql_query ("SET NAMES 'utf8'");
+//$mysqli = new mysqli(mysqli_host, $mysqli_user, $mysqli_password, $mysqli_database);
+$conexion = mysqli_connect($mysqli_host, $mysqli_user, $mysqli_password,$mysqli_database) or die("Problemas al tratar de establecer la conexion");
+	
 ?>

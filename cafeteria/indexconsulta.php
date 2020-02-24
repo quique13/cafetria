@@ -6,6 +6,7 @@ if(!$_SESSION['userid'])
 {  
   
     header("Location: indexlogin.php");//redirect to login page to secure the welcome page without login access.  
+    die();
 }  else
 {
 	include('Conexion.php');
@@ -144,10 +145,10 @@ if(!$_SESSION['userid'])
     
                     $selectPermisos = "SELECT * FROM usuario_reporte
                     where usuario='$usuarioP'";
-                    $resultPer = mysql_query($selectPermisos) or die('Error en la instruccion SQL');
+                    $resultPer = mysqli_query($conexion,$selectPermisos) or die('Error en la instruccion SQL');
     
     
-                    if ($rowPer = mysql_fetch_array($resultPer))
+                    if ($rowPer = mysqli_fetch_array($resultPer))
                     {
                         $permiso=$rowPer['tipo_usuario'];
                         if($permiso=='interno')
@@ -218,43 +219,48 @@ if(!$_SESSION['userid'])
                         if($reporte!=0 && $permiso=='externo_admin')
                         {
                             echo '
-                    <table style="table-layout:fixed; font-size:12px" class=" table table- table-bordered" >
-                    <caption><center><font color="white"><h3>Reporteria<h3></font><center></caption>
-                    </tr>
-                    <tr title="Reporte por producto vendido" bgcolor="#666666" style= "cursor:pointer; " onMouseOver="this.style.background=\'#088A29\';" onMouseOut="this.style.background=\'\';" onClick="javascript:GetReportes(\'producto\')"
-        ">
-                    <td ><center>VENTAS POR PRODUCTO
-                    </center> </td>
-                    </tr>
-                    <tr title="Tendencia de pedidos por día" bgcolor="#666666" style= "cursor:pointer;" onMouseOver="this.style.background=\'#088A29\';" onMouseOut="this.style.background=\'\';" onClick="javascript:GetReportes(\'tendencia\')"
-        ">
-                    <td ><center>TENDENCIA POR DIA
-                    </center> </td>
-                    </tr>';
-                            echo'</table>';
-                
-                            echo '
-                    <table style="table-layout:fixed; font-size:12px" class=" table table- table-bordered" >
-                    <caption><center><font color="white"><h3>Mantenimiento<h3></font><center></caption>
-                    <tr title="Subir menús de la semana" bgcolor="#666666" style= "cursor:pointer;" onMouseOver="this.style.background=\'#088A29\';" onMouseOut="this.style.background=\'\';" onClick="javascript:GetMantenimiento(\'Menu\')"
-        ">
-                    <td ><center>MENÚ DE LA SEMANA
-                    </center> </td>
-                    </tr>';
-                            echo'</table>
-                    <br>
-                    <font color="black"><button type="button" class="btn btn-primary btn-xs" onclick="location.href = \'index.php\'" >Regresar</button></font>
-                    <br><br>
-                    <font color="black"><button type="button" class="btn btn-danger btn-xs" onclick="location.href = \'logout1.php\'" >Cerrar Sesion</button></font>
-                    ';
+                                <table style="table-layout:fixed; font-size:12px" class=" table table- table-bordered" >
+                                <caption><center><font color="white"><h3>Reporteria<h3></font><center></caption>
+                                </tr>
+                                <tr title="Reporte por producto vendido" bgcolor="#666666" style= "cursor:pointer; " onMouseOver="this.style.background=\'#088A29\';" onMouseOut="this.style.background=\'\';" onClick="javascript:GetReportes(\'producto\')"">
+                                <td ><center>VENTAS POR PRODUCTO
+                                </center> </td>
+                                </tr>
+                                <tr title="Tendencia de pedidos por día" bgcolor="#666666" style= "cursor:pointer;" onMouseOver="this.style.background=\'#088A29\';" onMouseOut="this.style.background=\'\';" onClick="javascript:GetReportes(\'tendencia\')"">
+                                <td ><center>TENDENCIA POR DIA
+                                </center> </td>
+                                </tr>';
+                                        echo'</table>';
+                            
+                                        echo '
+                                <table style="table-layout:fixed; font-size:12px" class=" table table- table-bordered" >
+                                <caption><center><font color="white"><h3>Mantenimiento<h3></font><center></caption>
+                                <tr title="Subir menús de la semana" bgcolor="#666666" style= "cursor:pointer;" onMouseOver="this.style.background=\'#088A29\';" onMouseOut="this.style.background=\'\';" onClick="javascript:GetMantenimiento(\'Menu\')"">
+                                <td ><center>MENÚ DE LA SEMANA
+                                </center> </td>
+                                </tr>';
+                                        echo'</table>
+                                <br>
+                                <font color="black"><button type="button" class="btn btn-primary btn-xs" onclick="location.href = \'index.php\'" >Regresar</button></font>
+                                <br><br>
+                                <font color="black"><button type="button" class="btn btn-danger btn-xs" onclick="location.href = \'logout1.php\'" >Cerrar Sesion</button></font>
+                                ';
                     
                         }else
                         {
-                            header("Location: index.php");
+                            echo '
+                            <script type="text/javascript">
+                                window.location.replace("index.php");
+                            </script>';
                         }
                     }		
                 }else
-                    header("Location: pedidos1.php");
+                {
+                    echo '
+                    <script type="text/javascript">
+                        window.location.replace("pedidos1.php");
+                    </script>';
+                }
                 ?>
                     </div>
                     <div id="Getreportes" class="col-md-10 col-lg-10" >
@@ -269,6 +275,6 @@ if(!$_SESSION['userid'])
 			<div id="campos_vacios" title="Campos Vacios"></div>
 		</body>
 	</html>
-	<?
+	<?php
 	}
 ?>

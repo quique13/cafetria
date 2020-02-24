@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include('Conexion.php');
 
 
@@ -30,14 +31,14 @@ if($tipo=='credito')
 }else
 	$tipo_compra='efectivo';
 
-$consulta=mysql_query("SELECT * FROM usuario WHERE codigo_usuario='$Cod' AND estado = 'a'") or die("error en la consulta Codigo Principal");
+$consulta=mysqli_query($conexion,"SELECT * FROM usuario WHERE codigo_usuario='$Cod' AND estado = 'a'") or die("error en la consulta Codigo Principal");
 
-if ($row=mysql_fetch_array($consulta))
+if ($row=mysqli_fetch_array($consulta))
 {
-	$consulta2=mysql_query("SELECT id_detalle_fact FROM cafeteria.gastos_nuevos
+	$consulta2=mysqli_query($conexion,"SELECT id_detalle_fact FROM cafeteria.gastos_nuevos
 order by id_gasto desc
 limit 1; ");
-	$row2=mysql_fetch_array($consulta2);
+	$row2=mysqli_fetch_array($consulta2);
 	$id_detalle=$row2['id_detalle_fact']+1;
 	$nombre = $row['nombre'];
 	$fecha = date("Y-m-d H:i:s");
@@ -49,7 +50,7 @@ limit 1; ");
 		{
 			$monto=$cantidad[$i]*$precio[$i];
 			$monto=number_format($monto,2);
-			$consulta=mysql_query("insert into gastos_nuevos (
+			$consulta=mysqli_query($conexion,"insert into gastos_nuevos (
 			codigo_usuario,id_detalle_fact,nombre,cantidad,precio_unitario,monto_total,descripcion,fecha,tipo_compra) 
 			values ('$Cod','$id_detalle','$nombre','$cantidad[$i]','$precio[$i]','$monto','$descripcion[$i]','$fecha','$tipo_compra')") or die("Error en insert gastos");
 		}
@@ -71,7 +72,7 @@ else
 
 }
 
-mysql_close();
+mysqli_close($conexion);
 
 
 

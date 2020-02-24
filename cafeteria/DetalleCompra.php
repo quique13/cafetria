@@ -1,12 +1,13 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include('Conexion.php');
  session_start();
 	 if(!isset($_SESSION['Datos']))
 {
-	$consulta_Principal=mysql_query("select id_producto, descripcion from productos
+	$consulta_Principal=mysqli_query($conexion,"select id_producto, descripcion from productos
 	where estado = '1'") or die("error en la consulta menu Principal");
 
-	while($row_Principal=mysql_fetch_array($consulta_Principal))
+	while($row_Principal=mysqli_fetch_array($consulta_Principal))
 	{
 		$Data[$row_Principal['id_producto']];
 	}
@@ -30,13 +31,13 @@ include('Conexion.php');
 						<th width='65' style='white-space: nowrap;' align='center'>Precio</th>
 						<th width='65' style='white-space: nowrap;' align='center' >Sub-Total</th>
 					</tr>";
-	$consulta=mysql_query("select * from productos as p
+	$consulta=mysqli_query($conexion,"select * from productos as p
 inner join categoria_producto as cp
 on
 p.id_producto=cp.id_producto
 	where p.estado = '1'
 	order by cp.id_categoria,p.descripcion") or die("error en la consulta menu Principal");
-	while($row=mysql_fetch_array($consulta))
+	while($row=mysqli_fetch_array($consulta))
 	{
 		if(trim($_SESSION["Datos"][$row["id_producto"]])>0)
 		{
@@ -45,12 +46,12 @@ p.id_producto=cp.id_producto
 			$subtotal=($_SESSION["Datos"][$row["id_producto"]]*$row["precio"]);
 			$descripcion.="<tr>
 								<td   align='center'>".$_SESSION["Datos"][$row["id_producto"]]."</td>
-								<td   align='center'>".$row["descripcion"]."</td>
+								<td   align='center'>".utf8_encode($row["descripcion"])."</td>
 								<td   align='center'>".$row["precio"]."</td>
 								<td  align='center'>".number_format($subtotal,2)."</td>
 							</tr>
 							
-							<input type='hidden' name='descripcion[]' id='descripcion[]' value='".$row["descripcion"]."'/>
+							<input type='hidden' name='descripcion[]' id='descripcion[]' value='".utf8_encode($row["descripcion"])."'/>
             <input type='hidden' name='totalUni[]' id='totalUni' value='".$row["precio"]."'/>
 			<input type='hidden' name='cantidad[]' id='cantidad' value='".$_SESSION["Datos"][$row["id_producto"]]."'/>";
 			$descripcion2=$descripcion2.=$cantidad[$i].' X '.$nombre[$i].', ';				
@@ -72,14 +73,14 @@ p.id_producto=cp.id_producto
 $hoy=date("Y-m-d");
 
 $query = "SELECT * FROM gastos_nuevos WHERE fecha between'$hoy 00:00:00' and '$hoy 23:59:59' ORDER BY id_gasto DESC LIMIT 5";
-$result = mysql_query($query) or die("Error en consulta ultimos 5 gastos");
+$result = mysqli_query($conexion,$query) or die("Error en consulta ultimos 5 gastos");
 
 
 //echo $fecha1;
 //echo $fecha2;
 
 
-if ($row = mysql_fetch_array($result))
+if ($row = mysqli_fetch_array($result))
 {
 
 	$cadena.='<h3>Ultimas 5 compras</h3>';
@@ -97,12 +98,12 @@ if ($row = mysql_fetch_array($result))
 			$cadena.= "<tr> ";
 			$cadena.= "<td>".$row["nombre"]."</td> ";
 			$cadena.= "<td>".$row["monto_total"]."</td> ";
-			$cadena.= "<td width='200px'>".$row["descripcion"]."</td> ";
+			$cadena.= "<td width='200px'>".utf8_encode($row["descripcion"])."</td> ";
 			
 			$cadena.= "</tr> ";
 
 		} 
-	while ($row = mysql_fetch_array($result));
+	while ($row = mysqli_fetch_array($result));
 $cadena.= "</table></center>";
 
 

@@ -42,9 +42,9 @@ $fecha2 = $_POST['fecha2'];
  
 
 	$query3 = "SELECT SUM(monto_total) as monto_total FROM gastos WHERE fecha>='$fecha1' AND fecha<='$fecha2'";
-	$result3 = mysql_query($query3) or die("Error en la instruccion SQL");
+	$result3 = mysqli_query($query3) or die("Error en la instruccion SQL");
 
-if ($row3 = mysql_fetch_array($result3)){
+if ($row3 = mysqli_fetch_array($result3)){
 
 do {
 	
@@ -52,7 +52,7 @@ do {
 	echo "<br><br>";
 	echo "Total: ".$row3['monto_total'];
 
-} while ($row3 = mysql_fetch_array($result3));
+} while ($row3 = mysqli_fetch_array($result3));
 
 
 
@@ -63,9 +63,9 @@ do {
 
 
 $query2 = "SELECT * FROM usuario";
-$result2 = mysql_query($query2) or die("Error en la instruccion SQL");
+$result2 = mysqli_query($query2) or die("Error en la instruccion SQL");
 
-if ($row2 = mysql_fetch_array($result2)){
+if ($row2 = mysqli_fetch_array($result2)){
 
 do {
  
@@ -76,11 +76,11 @@ do {
 
 
 	 	$query = "SELECT SUM(monto_total) as monto_total FROM gastos WHERE fecha>='$fecha1' AND fecha<='$fecha2' AND 		 	codigo_usuario='$codigo_usuario'";
-		$result = mysql_query($query) or die("Error en la instruccion SQL");
+		$result = mysqli_query($query) or die("Error en la instruccion SQL");
 
 echo "<table border = '1'>";
 echo "<table widht=600px border=1px>";
-		if ($row = mysql_fetch_array($result)){
+		if ($row = mysqli_fetch_array($result)){
 
 			do {
              
@@ -88,7 +88,7 @@ echo "<table widht=600px border=1px>";
 			echo "<tr><td width=200px>".$codigo_usuario."</td><td width=200px>".$nombre."</td><td width=200px>".$row["monto_total"]."</td></tr>";
 
 
-				} while ($row = mysql_fetch_array($result));
+				} while ($row = mysqli_fetch_array($result));
 
 
 
@@ -96,7 +96,7 @@ echo "<table widht=600px border=1px>";
 		echo "<tr><td width=200px>".$codigo_usuario."</td><td width=200px>".$nombre."</td><td width=200px>0</td></tr>";
 	}
 	echo "</table>";
-} while ($row2 = mysql_fetch_array($result2));
+} while ($row2 = mysqli_fetch_array($result2));
 }
 ?>
       <form id="form1" name="form1" method="post" action="excelConsultaTotales.php?fecha1=<?php echo $fecha1; ?>&amp;fecha2=<?php echo $fecha2; ?>&amp;monto_total=<?php echo $monto_total; ?>&amp;codigo_usuario=<?php echo $codigo_usuario; ?>&amp;nombre=<?php echo $nombre;?>">

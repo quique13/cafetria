@@ -55,9 +55,9 @@ if($tipo=='Agregar')
 			 $consult = "SELECT * FROM usuario
 where estado ='a'
 order by nombre";
-$result = mysql_query($consult) or die(mysql_error());
+$result = mysqli_query($consult) or die(mysqli_error());
 			 
-			 while ($row = mysql_fetch_array($result))
+			 while ($row = mysqli_fetch_array($result))
   			{
 				$cadena.='<option  value="'.$row['codigo_usuario'].'" >'.$row['nombre'].'('.$row['codigo_usuario'].')</option>';}
 	 		$cadena.='</select>
@@ -117,9 +117,9 @@ $result = mysql_query($consult) or die(mysql_error());
 	$query = "SELECT * FROM cafeteria.categoria
 where estado= '1';";
 	
-	$result = mysql_query($query) or die('Error en la instruccion SQL');
+	$result = mysqli_query($query) or die('Error en la instruccion SQL');
 
-	if ($row = mysql_fetch_array($result))
+	if ($row = mysqli_fetch_array($result))
 		{
 			$cadena.='<button  type="button" class=" btn btn-primary btn-sm pull-center absoluto" title="Agregar nueva categoria" onClick="javascript: Mant_Menu(\'PrevNueva\')"><span class="glyphicon glyphicon-plus"></span></button>
 			<center><table width="400" border="1" bordercolor="#000000" style="table-layout:fixed; font-size:16px" >';
@@ -152,7 +152,7 @@ where estado= '1';";
 				$cadena.= '</tr> ';
 
 			} 
-			while ($row = mysql_fetch_array($result));
+			while ($row = mysqli_fetch_array($result));
 			$cadena.= '</table></center>';
 		}
 }else if($tipo=='EditProd')
@@ -168,9 +168,9 @@ on cp.id_producto=prod.id_producto
 where prod.estado='1'
 order by cat.id_categoria,prod.descripcion;";
 	
-	$result = mysql_query($query) or die('Error en la instruccion SQL');
+	$result = mysqli_query($query) or die('Error en la instruccion SQL');
 
-	if ($row = mysql_fetch_array($result))
+	if ($row = mysqli_fetch_array($result))
 		{
 			$cadena.='<button  type="button" class=" btn btn-primary btn-sm pull-center absoluto1" title="Agregar nueva categoria" onClick="javascript: Mant_Menu(\'PrevNuevaPro\')"><span class="glyphicon glyphicon-plus"></span></button>
 			<center><table width="650" border="1" bordercolor="#000000" style="table-layout:fixed; font-size:16px" >';
@@ -208,22 +208,22 @@ order by cat.id_categoria,prod.descripcion;";
 				$cadena.= '</tr> ';
 
 			} 
-			while ($row = mysql_fetch_array($result));
+			while ($row = mysqli_fetch_array($result));
 			$cadena.= '</table></center>';
 		}
 }else if($tipo=='EditHorario')
 {
 	$arrayCargos=array();
-$queryCargos=mssql_query("
+$queryCargos=mysqli_query("
 SELECT id_cargo,descripcion FROM cargos WHERE suspendido=0
 UNION
 SELECT 0,'Todos' ");
-while($rowCargos=mssql_fetch_array($queryCargos))
+while($rowCargos=mysqli_fetch_array($queryCargos))
 {
 	$arrayCargos[$rowCargos['id_cargo']]=$rowCargos['descripcion'];
 }
-$queryUsuario=mssql_query("SELECT * FROM usuarios WHERE suspendido=0");
-while($rowUsuario=mssql_fetch_array($queryUsuario))
+$queryUsuario=mysqli_query("SELECT * FROM usuarios WHERE suspendido=0");
+while($rowUsuario=mysqli_fetch_array($queryUsuario))
 {
 	$arrayUsuario[$rowUsuario['id_usuario']]=$rowUsuario['nombre_completo'];
 }
@@ -231,8 +231,8 @@ while($rowUsuario=mssql_fetch_array($queryUsuario))
 $uid=str_replace(" ","_",$uid);
 $log_file_name="archivo".$uid.".txt";
 $fh=fopen($log_file_name,"a+");
-fwrite($fh,mssql_get_last_message()."\n");*/
-$queryPorCargo=mysql_query("SELECT * FROM horario_permiso_pedidos WHERE estado=1");
+fwrite($fh,mysqli_get_last_message()."\n");*/
+$queryPorCargo=mysqli_query("SELECT * FROM horario_permiso_pedidos WHERE estado=1");
 
 //<i class="icon icon-plus" onclick="getFormMantAccesoPortafolio(\'\')"> Nuevo</i>
 $contador=1;
@@ -257,7 +257,7 @@ $cadena='
 				<thead>
 				<tbody>';
 				$contador=0;
-				while($rowPorCargo=mysql_fetch_array($queryPorCargo))
+				while($rowPorCargo=mysqli_fetch_array($queryPorCargo))
 				{
 					$countTR+=+1;
 				if($countTR%2==0)

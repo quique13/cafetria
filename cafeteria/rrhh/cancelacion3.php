@@ -35,7 +35,7 @@ $codigo_usuario= $_GET['codigo_usuario'];
 
 $query="Update usuario set estado='c' Where id = '".$_GET['id']."' And codigo_usuario = '".$_GET['codigo_usuario']."'";
 
-mysql_query($query);
+mysqli_query($query);
 
 ?>
 

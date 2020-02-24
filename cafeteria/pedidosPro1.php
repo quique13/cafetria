@@ -17,9 +17,9 @@ $tipo=$_POST['tipo'];
 $fecha_menu=$_POST['fecha_menu'];
 $id_usuario=$_POST['id_usuario'];
 
-$sql1=mssql_query("SELECT * FROM usuarios where login='$user'");
+$sql1=mysqli_query("SELECT * FROM usuarios where login='$user'");
 			
-if($row1 = mssql_fetch_array($sql1))
+if($row1 = msqli_fetch_array($sql1))
 {
 	$usuario=$row1['id_usuario'];
 	$nombre=$row1['nombre_completo'];
@@ -33,10 +33,10 @@ if($row1 = mssql_fetch_array($sql1))
 	$menu=$_POST['menu'];
 	$no_menu=$_POST['no_menu'];
 	
-	$insert="insert into pedidos (id_usuario,nombre_usuario,dia,no_menu,descrip_menu,fecha_menu,fecha_pedido) values('". htmlentities(mysql_real_escape_string($usuario))."','".utf8_encode(mysql_real_escape_string($nombre))."','".mysql_real_escape_string($dia)."','".$no_menu."','".mysql_real_escape_string($menu)."','$fecha','$hoy')
+	$insert="insert into pedidos (id_usuario,nombre_usuario,dia,no_menu,descrip_menu,fecha_menu,fecha_pedido) values('". htmlentities(mysqli_real_escape_string($usuario))."','".utf8_encode(mysqli_real_escape_string($nombre))."','".mysqli_real_escape_string($dia)."','".$no_menu."','".mysqli_real_escape_string($menu)."','$fecha','$hoy')
 		ON DUPLICATE KEY UPDATE
-		descrip_menu='".mysql_real_escape_string($menu)."',no_menu='".$no_menu."',fecha_pedido='".$hoy."'";	
-	$resultL = mysql_query($insert) or die(mysql_error ());
+		descrip_menu='".mysqli_real_escape_string($menu)."',no_menu='".$no_menu."',fecha_pedido='".$hoy."'";	
+	$resultL = mysqli_query($insert) or die(mysqli_error ());
 	
 }
 else if($tipo=='tabla')
@@ -56,9 +56,9 @@ where id_usuario='$usuario'
 and fecha_menu >='$fecha_inicio'
 order by fecha_menu 
 limit 5;";
-	$resultPT = mysql_query($selectPT) or die('Error en la instruccion SQL1');
+	$resultPT = mysqli_query($selectPT) or die('Error en la instruccion SQL1');
 	
-	while($rowPT = mysql_fetch_array($resultPT))
+	while($rowPT = mysqli_fetch_array($resultPT))
 	{
 		$fechaOrden=date('d-m-Y',strtotime($rowPT['fecha_menu']));
 		$cadena.='<tr bgcolor="#333333"> 
@@ -79,8 +79,8 @@ limit 5;";
 {
 	$delete=("delete from pedidos
 where id_usuario='$id_usuario' and fecha_menu='$fecha_menu'"); 
-$queryD=mysql_query($delete) or die(mysql_error());
-	$row=mysql_fetch_array($delete);
+$queryD=mysqli_query($delete) or die(mysqli_error());
+	$row=mysqli_fetch_array($delete);
 }
 $array=array('result'=>$cadena);
 echo json_encode($array);

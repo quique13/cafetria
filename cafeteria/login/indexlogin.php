@@ -6,9 +6,9 @@ include("Conexion.php");
 function verificar_login($user,$password,&$result)
     {
         $sql = "SELECT * FROM usuario_reporte WHERE usuario='$user' and password='$password'";
-        $rec = mysql_query($sql);
+        $rec = mysqli_query($sql);
         $count = 0;
-        while($row = mysql_fetch_object($rec))
+        while($row = mysqli_fetch_object($rec))
         {
             $count++;
             $result = $row;
